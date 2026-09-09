@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodrigo Rocha - Software Engineer</title>
+  <meta name="description" content="Rodrigo Rocha, final-year Informatics and Computing Engineering student at FEUP. Backend-leaning full-stack engineer: internship at SolvIt, an exam-scheduling optimisation engine, and a multi-user routine app.">
+  <meta name="theme-color" content="#0C0C0C">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Once this is live on a real domain, add: <link rel="canonical" href="https://your-domain/"> -->
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rodrigo Rocha - Software Engineer">
+  <meta property="og:description" content="Final-year Informatics and Computing Engineering student at FEUP, focused on backend and full-stack development.">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preload" href="fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/ClashGrotesk-Bold.woff2" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/background.css">
+  <link rel="stylesheet" href="styles/nav.css">
+  <link rel="stylesheet" href="styles/hero.css">
+  <link rel="stylesheet" href="styles/projects.css">
+  <link rel="stylesheet" href="styles/timeline.css">
+  <link rel="stylesheet" href="styles/contact.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rodrigo Rocha",
+    "jobTitle": "Software Engineer",
+    "email": "mailto:rodrigo78rocha@gmail.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/rodrigojrrocha",
+      "https://github.com/RochaCodes"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Porto",
+      "addressCountry": "PT"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Faculdade de Engenharia da Universidade do Porto"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Icon sprite, referenced throughout via <use>. Phosphor Icons (light), MIT licensed. -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-envelope" viewBox="0 0 256 256"><path d="M224,50H32a6,6,0,0,0-6,6V192a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V56A6,6,0,0,0,224,50Zm-96,85.86L47.42,62H208.58ZM101.67,128,38,186.36V69.64Zm8.88,8.14L124,148.42a6,6,0,0,0,8.1,0l13.4-12.28L208.58,194H47.43ZM154.33,128,218,69.64V186.36Z"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 256 256"><path d="M128,62a42,42,0,1,0,42,42A42,42,0,0,0,128,62Zm0,72a30,30,0,1,1,30-30A30,30,0,0,1,128,134Zm0-116a86.1,86.1,0,0,0-86,86c0,30.91,14.34,63.74,41.472,94.94a252.5,252.5,0,0,0,40.9,37.81,6,6,0,0,0,7.25,0,252.5,252.5,0,0,0,40.9-37.81C199.66,167.74,214,134.91,214,104A86.1,86.1,0,0,0,128,18Zm0,206c-13.1-10.2-74-60.75-74-120a74,74,0,0,1,148,0C202,163.25,141.1,213.8,128,224Z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 256 256"><path d="M216,26H40A14,14,0,0,0,26,40V216a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V40A14,14,0,0,0,216,26Zm2,190a2,2,0,0,1-2,2H40a2,2,0,0,1-2-2V40a2,2,0,0,1,2-2H216a2,2,0,0,1,2,2ZM94,112v64a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm88,28v36a6,6,0,0,1-12,0V140a22,22,0,0,0-44,0v36a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0v2.11A34,34,0,0,1,182,140ZM98,84A10,10,0,1,1,88,74,10,10,0,0,1,98,84Z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 256 256"><path d="M206.13,75.92A57.79,57.79,0,0,0,201.2,29a6,6,0,0,0-5.2-3,57.77,57.77,0,0,0-47,24H123A57.77,57.77,0,0,0,76,26a6,6,0,0,0-5.2,3,57.79,57.79,0,0,0-4.93,46.92A55.88,55.88,0,0,0,58,104v8a54.06,54.06,0,0,0,50.45,53.87A37.85,37.85,0,0,0,98,192v10H72a26,26,0,0,1-26-26A38,38,0,0,0,8,138a6,6,0,0,0,0,12,26,26,0,0,1,26,26,38,38,0,0,0,38,38H98v18a6,6,0,0,0,12,0V192a26,26,0,0,1,52,0v40a6,6,0,0,0,12,0V192a37.85,37.85,0,0,0-10.45-26.13A54.06,54.06,0,0,0,214,112v-8A55.88,55.88,0,0,0,206.13,75.92ZM202,112a42,42,0,0,1-42,42H112a42,42,0,0,1-42-42v-8a43.86,43.86,0,0,1,7.3-23.69,6,6,0,0,0,.81-5.76,45.85,45.85,0,0,1,1.43-36.42,45.85,45.85,0,0,1,35.23,21.1A6,6,0,0,0,119.83,62h32.34a6,6,0,0,0,5.06-2.76,45.83,45.83,0,0,1,35.23-21.11,45.85,45.85,0,0,1,1.43,36.42,6,6,0,0,0,.79,5.74A43.78,43.78,0,0,1,202,104Z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 256 256"><path d="M222,144v64a6,6,0,0,1-6,6H40a6,6,0,0,1-6-6V144a6,6,0,0,1,12,0v58H210V144a6,6,0,0,1,12,0Zm-98.24,4.24a6,6,0,0,0,8.48,0l40-40a6,6,0,0,0-8.48-8.48L134,129.51V32a6,6,0,0,0-12,0v97.51L92.24,99.76a6,6,0,0,0-8.48,8.48Z"/></symbol>
+    <symbol id="i-arrow-down" viewBox="0 0 256 256"><path d="M204.24,148.24l-72,72a6,6,0,0,1-8.48,0l-72-72a6,6,0,0,1,8.48-8.48L122,201.51V40a6,6,0,0,1,12,0V201.51l61.76-61.75a6,6,0,0,1,8.48,8.48Z"/></symbol>
+    <symbol id="i-arrow-up" viewBox="0 0 256 256"><path d="M204.24,116.24a6,6,0,0,1-8.48,0L134,54.49V216a6,6,0,0,1-12,0V54.49L60.24,116.24a6,6,0,0,1-8.48-8.48l72-72a6,6,0,0,1,8.48,0l72,72A6,6,0,0,1,204.24,116.24Z"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 256 256"><path d="M106,112a6,6,0,0,1,6-6h32a6,6,0,0,1,0,12H112A6,6,0,0,1,106,112ZM230,72V200a14,14,0,0,1-14,14H40a14,14,0,0,1-14-14V72A14,14,0,0,1,40,58H82V48a22,22,0,0,1,22-22h48a22,22,0,0,1,22,22V58h42A14,14,0,0,1,230,72ZM94,58h68V48a10,10,0,0,0-10-10H104A10,10,0,0,0,94,48ZM38,72v42.79A186,186,0,0,0,128,138a185.91,185.91,0,0,0,90-23.22V72a2,2,0,0,0-2-2H40A2,2,0,0,0,38,72ZM218,200V128.37A198.12,198.12,0,0,1,128,150a198.05,198.05,0,0,1-90-21.62V200a2,2,0,0,0,2,2H216A2,2,0,0,0,218,200Z"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 256 256"><path d="M250.82,90.71l-120-64a5.94,5.94,0,0,0-5.64,0l-120,64a6,6,0,0,0,0,10.58L34,116.67v49.62a14,14,0,0,0,3.55,9.32C50.42,189.94,79.29,214,128,214a127.21,127.21,0,0,0,50-9.73V240a6,6,0,0,0,12,0V198.35a113.18,113.18,0,0,0,28.45-22.75,13.91,13.91,0,0,0,3.55-9.31V116.67l28.82-15.38a6,6,0,0,0,0-10.58ZM128,202c-44,0-70-21.56-81.52-34.41a2,2,0,0,1-.48-1.3V123.07l79.18,42.22a6,6,0,0,0,5.64,0L178,140.13v51C165,197.35,148.45,202,128,202Zm82-35.71a2,2,0,0,1-.48,1.3A100.25,100.25,0,0,1,190,184.3V133.73l20-10.66Zm-22.15-45a6.27,6.27,0,0,0-1-.71l-56-29.86a6,6,0,0,0-5.64,10.58L175.25,128,128,153.2,20.75,96,128,38.8,235.25,96Z"/></symbol>
+    <symbol id="i-barbell" viewBox="0 0 256 256"><path d="M248,122H238V88a14,14,0,0,0-14-14H206V64a14,14,0,0,0-14-14H168a14,14,0,0,0-14,14v58H102V64A14,14,0,0,0,88,50H64A14,14,0,0,0,50,64V74H32A14,14,0,0,0,18,88v34H8a6,6,0,0,0,0,12H18v34a14,14,0,0,0,14,14H50v10a14,14,0,0,0,14,14H88a14,14,0,0,0,14-14V134h52v58a14,14,0,0,0,14,14h24a14,14,0,0,0,14-14V182h18a14,14,0,0,0,14-14V134h10a6,6,0,0,0,0-12ZM32,170a2,2,0,0,1-2-2V88a2,2,0,0,1,2-2H50v84Zm58,22a2,2,0,0,1-2,2H64a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2H88a2,2,0,0,1,2,2Zm104,0a2,2,0,0,1-2,2H168a2,2,0,0,1-2-2V64a2,2,0,0,1,2-2h24a2,2,0,0,1,2,2Zm32-24a2,2,0,0,1-2,2H206V86h18a2,2,0,0,1,2,2Z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 256 256"><path d="M67.84,92.61,25.37,128l42.47,35.39a6,6,0,1,1-7.68,9.22l-48-40a6,6,0,0,1,0-9.22l48-40a6,6,0,0,1,7.68,9.22Zm176,30.78-48-40a6,6,0,1,0-7.68,9.22L230.63,128l-42.47,35.39a6,6,0,1,0,7.68,9.22l48-40a6,6,0,0,0,0-9.22Zm-81.79-89A6,6,0,0,0,154.36,38l-64,176A6,6,0,0,0,94,221.64a6.15,6.15,0,0,0,2,.36,6,6,0,0,0,5.64-3.95l64-176A6,6,0,0,0,162.05,34.36Z"/></symbol>
+    <symbol id="i-folder-star" viewBox="0 0 256 256"><path d="M38,64V200a2,2,0,0,0,2,2h80a6,6,0,0,1,0,12H40a14,14,0,0,1-14-14V64A14,14,0,0,1,40,50H93.33a14.06,14.06,0,0,1,8.4,2.8L130,74h86a14,14,0,0,1,14,14v32a6,6,0,0,1-12,0V88a2,2,0,0,0-2-2H128a6,6,0,0,1-3.6-1.2L94.53,62.4a2,2,0,0,0-1.2-.4H40A2,2,0,0,0,38,64ZM235.82,166.24l-23.49,19.39,7.16,28.93a6,6,0,0,1-8.87,6.61L184,205.5l-26.62,15.67a6,6,0,0,1-8.87-6.61l7.16-28.93-23.49-19.39a6,6,0,0,1,3.36-10.61l31-2.4,11.91-27.61a6,6,0,0,1,11,0l11.91,27.61,31,2.4a6,6,0,0,1,3.36,10.61Zm-19.1.21-19.83-1.53a6,6,0,0,1-5-3.61L184,143.14l-7.84,18.17a6,6,0,0,1-5,3.61l-19.83,1.53,14.94,12.33a6,6,0,0,1,2,6.07l-4.63,18.74L181,193.36a6,6,0,0,1,6.08,0l17.37,10.23-4.64-18.74a6,6,0,0,1,2-6.07Z"/></symbol>
+  </svg>
+
+  <!-- Ambient texture: grain, grid, and slow-drifting outlined geometry. -->
+  <div class="ambient" aria-hidden="true">
+    <span class="shape shape-1"></span>
+    <span class="shape shape-2"></span>
+    <span class="shape shape-3"></span>
+    <span class="shape shape-4"></span>
+    <div class="grid-pattern"></div>
+    <div class="grain"></div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#top">
+        <span>Rodrigo Rocha</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#background">Background</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="#contact">Hire Me</a>
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>
+            <span>Rodrigo</span>
+            <span class="grad">Rocha</span>
+          </h1>
+
+          <p class="hero-sub">
+            Final-year Informatics &amp; Computing Engineering student at FEUP,
+            building <strong>backend systems</strong> and full-stack products
+            end to end &mdash; from the data model up to the interface.
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">
+              View my work
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-down"></use></svg>
+            </a>
+            <a class="btn btn-ghost" href="Rodrigo-Rocha-CV.pdf" download>
+              Download CV
+              <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- The orb: gradient avatar, two counter-rotating rings, four icon
+             tiles orbiting on their own float cycles. -->
+        <div class="hero-visual">
+          <div class="orb">
+            <span class="orb-ring orb-ring-1" aria-hidden="true"></span>
+            <span class="orb-ring orb-ring-2" aria-hidden="true"></span>
+            <span class="orb-avatar" aria-hidden="true">RR</span>
+
+            <div class="orb-orbit">
+              <div class="orb-slot" style="--a:0deg">
+                <div class="orb-upright">
+                  <span class="orb-icon" aria-hidden="true"><svg class="icon"><use href="#i-code"></use></svg></span>
+                </div>
+              </div>
+              <div class="orb-slot" style="--a:90deg">
+                <div class="orb-upright">
+                  <span class="orb-icon" aria-hidden="true"><svg class="icon"><use href="#i-briefcase"></use></svg></span>
+                </div>
+              </div>
+              <div class="orb-slot" style="--a:180deg">
+                <div class="orb-upright">
+                  <span class="orb-icon" aria-hidden="true"><svg class="icon"><use href="#i-cap"></use></svg></span>
+                </div>
+              </div>
+              <div class="orb-slot" style="--a:270deg">
+                <div class="orb-upright">
+                  <a class="orb-icon" href="https://github.com/RochaCodes" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SKILL MARQUEE ================= -->
+    <section class="marquee" aria-label="Technologies">
+      <div class="marquee-track">
+        <ul class="marquee-list">
+          <li>Java</li>
+          <li>Spring Boot</li>
+          <li>PostgreSQL</li>
+          <li>TypeScript</li>
+          <li>Angular</li>
+          <li>React</li>
+          <li>Next.js</li>
+          <li>Python</li>
+          <li>Docker</li>
+          <li>Flyway</li>
+          <li>REST APIs</li>
+          <li>Linux</li>
+          <li>C++</li>
+          <li>SQL</li>
+          <li>Git</li>
+          <li>Prisma</li>
+        </ul>
+        <!-- Exact duplicate: the track translates by -50%, so this copy lands
+             where the original started and the loop has no seam. -->
+        <ul class="marquee-list" aria-hidden="true">
+          <li>Java</li>
+          <li>Spring Boot</li>
+          <li>PostgreSQL</li>
+          <li>TypeScript</li>
+          <li>Angular</li>
+          <li>React</li>
+          <li>Next.js</li>
+          <li>Python</li>
+          <li>Docker</li>
+          <li>Flyway</li>
+          <li>REST APIs</li>
+          <li>Linux</li>
+          <li>C++</li>
+          <li>SQL</li>
+          <li>Git</li>
+          <li>Prisma</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Selected work</span>
+          <h2>Things I&rsquo;ve built</h2>
+          <p>A capstone, a personal product I use daily, and one still in progress.</p>
+        </div>
+
+        <div class="bento">
+
+          <article class="card card--wide reveal">
+            <div class="card-top">
+              <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-barbell"></use></svg></span>
+              <span class="card-status">Private repository</span>
+            </div>
+
+            <h3>Rotina</h3>
+            <p class="card-desc">
+              An app to run four things at once: gym, running, food and calendar.
+              Multi-user &mdash; each person gets a short onboarding and leaves with
+              their own training routine, running plan and nutrition target,
+              generated from what they entered rather than a generic template.
+            </p>
+
+            <ul class="card-points">
+              <li>Offline-safe set logging: every set carries a client-generated id, so a lost network response is retried without duplicating the set or breaking a personal record.</li>
+              <li>An adaptive nutrition engine that tells &ldquo;no data&rdquo; apart from &ldquo;low adherence&rdquo; and reacts differently to each &mdash; it never cuts calories without reliable data, but raises them on early signs of losing too fast.</li>
+              <li>A 17-week running plan generated by rule (10% weekly volume increase, a deload every four weeks, long run capped at 50% of volume), not written by hand.</li>
+            </ul>
+
+            <div class="card-tags">
+              <span class="tag">Next.js</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">Tailwind</span>
+              <span class="tag">TanStack Query</span>
+              <span class="tag">Turso</span>
+            </div>
+          </article>
+
+          <article class="card reveal">
+            <div class="card-top">
+              <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-folder-star"></use></svg></span>
+              <span class="card-status">Private repository</span>
+            </div>
+
+            <h3>Exam Timetabling Engine</h3>
+            <p class="card-desc">
+              Capstone project at FEUP. Formalised the university&rsquo;s exam
+              scheduling rules as a mixed-integer program and built a Python
+              pipeline pulling real enrolment data for the full Informatics
+              Engineering programme.
+            </p>
+
+            <ul class="card-points">
+              <li>Cut same-day exam clashes by 88.9% and consecutive-day exams by 78.1% against the official timetable.</li>
+            </ul>
+
+            <p class="card-meta">Feb 2026 &ndash; Jul 2026</p>
+
+            <div class="card-tags">
+              <span class="tag">IBM ILOG CPLEX</span>
+              <span class="tag">Mixed-Integer Programming</span>
+              <span class="tag">Python</span>
+            </div>
+          </article>
+
+          <!--
+            TODO(Rodrigo): fill in the real details for this third card before
+            the site ships:
+              - name of the original site you found and redesigned
+              - what you changed / rebuilt, and in what stack
+              - a live link and/or repo, if you want either public
+            Ask Claude to swap this card's copy once you have that.
+          -->
+          <article class="card card--pending reveal">
+            <div class="card-top">
+              <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-code"></use></svg></span>
+              <span class="card-status card-status--live">In progress</span>
+            </div>
+
+            <h3>Website redesign</h3>
+            <p class="card-desc">
+              A ground-up redesign and rebuild of an existing website: a sharper
+              visual system and a modern front end, built end to end. Details and
+              a link are landing here shortly.
+            </p>
+
+            <div class="card-tags">
+              <span class="tag">Design system</span>
+              <span class="tag">Front end</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPERIENCE ================= -->
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Experience</span>
+          <h2>Shipped in production</h2>
+        </div>
+
+        <div class="timeline reveal">
+          <article class="tl-item">
+            <span class="tl-dot" aria-hidden="true"></span>
+            <div class="tl-head">
+              <h3>Software Engineering Intern <span class="tl-org">&middot; SolvIt</span></h3>
+              <span class="tl-date">Jul 2026 &ndash; Aug 2026</span>
+            </div>
+
+            <figure class="figure">
+              <img src="images/solvit-terinov.jpg" alt="TERINOV, the technology park in Terceira, Azores, where SolvIt is based" loading="lazy" width="1200" height="800">
+              <figcaption>TERINOV &middot; Terceira</figcaption>
+            </figure>
+
+            <ul class="tl-points">
+              <li>Built an end-to-end document processing pipeline in Java and Spring Boot for automated ingestion and classification of PDFs and images.</li>
+              <li>Extracted structured fields from documents and implemented SHA-256 deduplication with content-based validation.</li>
+              <li>Designed the PostgreSQL persistence layer with versioned Flyway migrations and page-level normalisation.</li>
+              <li>Built the Angular front end for document upload and review of extraction results, consuming the backend through REST APIs.</li>
+            </ul>
+
+            <div class="tl-tags">
+              <span class="tag">Java</span>
+              <span class="tag">Spring Boot</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Flyway</span>
+              <span class="tag">Angular</span>
+              <span class="tag">Docker</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BACKGROUND ================= -->
+    <section id="background">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Background</span>
+          <h2>Education &amp; beyond the code</h2>
+        </div>
+
+        <div class="split reveal">
+          <div>
+            <h3 class="split-title font-display">Education</h3>
+            <div class="timeline">
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-head">
+                  <h3>Faculdade de Engenharia da U.Porto</h3>
+                  <span class="tl-date">2023 &ndash; 2026</span>
+                </div>
+                <p class="tl-role">BSc Informatics &amp; Computing Engineering</p>
+                <p class="tl-desc">
+                  Completing the BSc while already taking master&rsquo;s (M.EIC)
+                  curricular units in parallel.
+                </p>
+                <div class="tl-tags">
+                  <span class="tag">Algorithms &amp; Data Structures</span>
+                  <span class="tag">Databases</span>
+                  <span class="tag">Compilers</span>
+                  <span class="tag">AI</span>
+                  <span class="tag">Machine Learning</span>
+                </div>
+              </article>
+
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-head">
+                  <h3>Escola Secundária Vitorino Nemésio</h3>
+                  <span class="tl-date">Concluded 2023</span>
+                </div>
+                <p class="tl-role">Science &amp; Technology</p>
+                <p class="tl-desc">Praia da Vitória, Portugal.</p>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="split-title font-display">Beyond the code</h3>
+            <div class="timeline">
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-head">
+                  <h3>Tuna de Engenharia da U.Porto</h3>
+                  <span class="tl-date">2023 &ndash; now</span>
+                </div>
+                <p class="tl-role">Performer &amp; External Relations</p>
+                <figure class="figure">
+                  <img src="images/tuna-feup.jpg" alt="Rodrigo performing on stage with Tuna de Engenharia da Universidade do Porto" loading="lazy" width="400" height="250">
+                  <figcaption>On stage</figcaption>
+                </figure>
+                <p class="tl-desc">
+                  Manage external booking correspondence for a 60-member ensemble:
+                  pricing, contract terms and logistics with festivals,
+                  municipalities and private clients. Perform at concerts across
+                  Portugal and abroad.
+                </p>
+              </article>
+
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-head">
+                  <h3>Centro de Eventos FEUP</h3>
+                  <span class="tl-date">2025 &ndash; now</span>
+                </div>
+                <p class="tl-role">Audiovisual Technician</p>
+                <p class="tl-desc">
+                  Set up, run and tear down audio, video, streaming and lighting
+                  systems for conferences and congresses, troubleshooting live.
+                </p>
+              </article>
+
+              <article class="tl-item">
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-head">
+                  <h3>Mentoria U.Porto</h3>
+                  <span class="tl-date">2025 &ndash; now</span>
+                </div>
+                <p class="tl-role">Mentor</p>
+                <p class="tl-desc">
+                  Support new engineering students through peer mentoring,
+                  adapting the programme to what each mentee needs.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Get in touch</span>
+          <h2>Let&rsquo;s build something</h2>
+          <p class="contact-lede">
+            Open to backend and full-stack roles, and always happy to talk shop.
+          </p>
+        </div>
+
+        <div class="contact-cards reveal">
+          <a class="contact-card" href="mailto:rodrigo78rocha@gmail.com">
+            <span class="contact-card-icon"><svg class="icon" aria-hidden="true"><use href="#i-envelope"></use></svg></span>
+            <h3>Email</h3>
+            <p>rodrigo78rocha@gmail.com</p>
+          </a>
+          <div class="contact-card">
+            <span class="contact-card-icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"></use></svg></span>
+            <h3>Location</h3>
+            <p>Porto, Portugal</p>
+          </div>
+        </div>
+
+        <div class="socials reveal">
+          <a class="social" href="https://www.linkedin.com/in/rodrigojrrocha" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg class="icon" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+          </a>
+          <a class="social" href="https://github.com/RochaCodes" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg class="icon" aria-hidden="true"><use href="#i-github"></use></svg>
+          </a>
+          <a class="social" href="Rodrigo-Rocha-CV.pdf" download aria-label="Download CV">
+            <svg class="icon" aria-hidden="true"><use href="#i-download"></use></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>&copy; <span id="year">2026</span> Rodrigo Rocha &middot; Porto, Portugal</span>
+      <a href="#top">
+        Back to top
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow-up"></use></svg>
+      </a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
