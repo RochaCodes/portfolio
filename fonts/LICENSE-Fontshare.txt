@@ -1,0 +1,20 @@
+Clash Grotesk and Satoshi — both by Indian Type Foundry, distributed via
+Fontshare (fontshare.com), licensed under the ITF Free Font License (FFL) v2.0.
+
+Free for personal and commercial use, unlimited scale, any media including
+websites, with self-hosting via @font-face explicitly permitted:
+
+  "You may self-host the Font Software on your own servers or infrastructure
+  for use on your own websites and applications, including through standard
+  webfont technologies such as CSS @font-face. Self-hosting by end users is
+  permitted and recommended for greater control, reliability and performance."
+
+Full license: https://www.fontshare.com/licenses/itf-ffl
+
+Clash Grotesk — https://www.fontshare.com/fonts/clash-grotesk
+  Weights used here: Semibold (600), Bold (700). Display/headings only.
+
+Satoshi — https://www.fontshare.com/fonts/satoshi
+  Weights used here: Regular (400), Medium (500), Bold (700). Body text, UI.
+
+Files downloaded as-is from Fontshare, unmodified (no subsetting/conversion).
