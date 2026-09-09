@@ -1,0 +1,160 @@
+/* ==========================================================================
+   Ambient layer — grain, grid, floating geometry
+   Fixed, pointer-events:none, painted behind everything at z-index -1.
+   ========================================================================== */
+
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ---- Noise overlay ----
+   The texture that keeps large flat areas of #0C0C0C from banding. Inline
+   SVG turbulence, so it costs no request and scales to any viewport. */
+.grain {
+  position: absolute;
+  inset: -10%;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Grid pattern ----
+   Masked to fade toward the edges so no line ever terminates against the
+   viewport border. */
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background-image:
+    linear-gradient(to right, var(--ghost) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--ghost) 1px, transparent 1px);
+  background-size: 80px 80px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 20%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 20%, transparent 100%);
+}
+
+/* ---- Floating geometry ----
+   Thin outlined shapes drifting slowly behind the content. Outlines only —
+   no fills, no shadows — so they read as drafting marks rather than blobs. */
+.shape {
+  position: absolute;
+  border: 1px solid var(--ghost);
+  will-change: transform;
+}
+
+.shape-1 {
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  top: 8%;
+  right: -120px;
+  border-color: var(--ghost-accent);
+  animation: float1 22s ease-in-out infinite;
+}
+
+.shape-2 {
+  width: 240px;
+  height: 240px;
+  border-radius: var(--r-lg);
+  top: 46%;
+  left: -80px;
+  transform: rotate(22deg);
+  animation: float2 26s ease-in-out infinite;
+}
+
+.shape-3 {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  bottom: 12%;
+  right: 18%;
+  border-color: var(--ghost-warm);
+  animation: float3 30s ease-in-out infinite;
+}
+
+.shape-4 {
+  width: 300px;
+  height: 300px;
+  border-radius: var(--r-lg);
+  bottom: -100px;
+  left: 28%;
+  transform: rotate(-14deg);
+  animation: float4 34s ease-in-out infinite;
+}
+
+/* Four independent drifts, reused by the hero orb's icon containers so the
+   whole page floats to the same four rhythms. */
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(-24px, 28px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: rotate(22deg) translate(0, 0); }
+  50%      { transform: rotate(22deg) translate(30px, -22px); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(18px, 26px); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: rotate(-14deg) translate(0, 0); }
+  50%      { transform: rotate(-14deg) translate(-26px, -18px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shape {
+    animation: none;
+  }
+}
+
+/* The shapes buy little on a phone and cost layer memory, so they drop out. */
+@media (max-width: 720px) {
+  .shape-2,
+  .shape-3,
+  .shape-4 {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Scroll progress
+   Pure CSS scroll-driven animation — no listener, no rAF. Without
+   animation-timeline support the bar simply stays at scaleX(0).
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 120;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), var(--warm));
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: progress linear;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+}
