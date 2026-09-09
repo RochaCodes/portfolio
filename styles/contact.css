@@ -1,0 +1,158 @@
+/* ==========================================================================
+   Contact — centred, three cards, social row
+   ========================================================================== */
+
+.contact {
+  text-align: center;
+}
+
+.contact .eyebrow {
+  /* The eyebrow's 48px rule is drawn with ::before, so centring the flex box
+     keeps the rule and the label together as one centred unit. */
+  justify-content: center;
+}
+
+.contact h2 {
+  font-size: clamp(2.5rem, 1.8rem + 3vw, 3.75rem);   /* → 60px */
+  max-width: 16ch;
+  margin: 0 auto;
+}
+
+.contact-lede {
+  margin: 1.25rem auto 0;
+  max-width: 52ch;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  max-width: 620px;
+  margin: clamp(2.5rem, 2rem + 2vw, 4rem) auto 0;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-lg);
+  transition: transform var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+
+.contact-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+}
+
+.contact-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: var(--surface-light);
+  border: 1px solid var(--ghost);
+  color: var(--accent);
+  transition: background-color var(--t) var(--ease);
+}
+
+.contact-card:hover .contact-card-icon {
+  background: var(--accent-soft);
+}
+
+.contact-card h3 {
+  font-size: 16px;
+  font-family: var(--body);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.contact-card p {
+  font-size: 14px;
+  color: var(--text-2);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Social row ---- */
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+}
+
+.social {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  background: var(--surface);
+  border: 1px solid var(--ghost-strong);
+  color: var(--text-2);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease),
+    transform var(--t) var(--ease);
+}
+
+.social:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card,
+  .social {
+    transition: none;
+  }
+  .contact-card:hover,
+  .social:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  border-top: 1px solid var(--ghost);
+  padding: 2.25rem 0 3rem;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footer-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--t) var(--ease);
+}
+
+.footer-row a:hover {
+  color: var(--accent);
+}
