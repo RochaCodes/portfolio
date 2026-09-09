@@ -1,0 +1,9 @@
+# Wrangler build/state cache
+.wrangler/
+
+# Dependencies (none committed — the site has no build step)
+node_modules/
+
+# OS cruft
+.DS_Store
+Thumbs.db
