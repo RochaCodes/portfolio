@@ -1,0 +1,370 @@
+/* ==========================================================================
+   Rodrigo Rocha — personal site
+   Design tokens, reset and shared primitives.
+
+   Dark, high-contrast and warm: near-black grounds under a Sunset Red accent
+   with a Sand Warmth secondary. Clash Grotesk carries every heading from
+   32px up; Satoshi carries body text and UI. Depth comes from thin 5% white
+   "ghost" borders and translation transforms — never heavy shadows.
+
+   Nothing below hardcodes a colour: every surface, border and accent reads a
+   token, so the whole system repaints from this one file.
+   ========================================================================== */
+
+/* Paths are relative to this stylesheet (styles/), so the fonts directory
+   sits one level up — a bare "fonts/..." would resolve to styles/fonts/ and
+   silently fall back to a system font. */
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("../fonts/ClashGrotesk-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("../fonts/ClashGrotesk-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("../fonts/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ---- Type ---- */
+  --display: "Clash Grotesk", "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body: "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* ---- Colour ---- */
+  --bg: #0C0C0C;
+  --surface: #141414;
+  --surface-light: #1C1C1C;
+
+  --accent: #E8553A;          /* Sunset Red */
+  --accent-hover: #F0654B;    /* one step brighter, for button hover */
+  --warm: #D4A574;            /* Sand Warmth */
+
+  --text: #F0EDE8;
+  --text-2: #B0ADA8;
+  --muted: #8A8A8A;
+
+  /* Ink for anything sitting ON the accent fill — buttons, the logo mark, the
+     avatar, hovered tags. Sunset Red is light enough that --text over it is
+     only 3.1:1, which fails AA at label sizes; the near-black ground gives
+     5.4:1 and reads sharper on the orange besides. */
+  --on-accent: var(--bg);
+
+  /* Ghost borders. The 5% white edge is the signature container treatment;
+     the 10% step is for anything that needs to read as interactive. */
+  --ghost: rgba(255, 255, 255, 0.05);
+  --ghost-strong: rgba(255, 255, 255, 0.10);
+  --ghost-accent: rgba(232, 85, 58, 0.10);
+  --ghost-warm: rgba(212, 165, 116, 0.10);
+  --accent-soft: rgba(232, 85, 58, 0.15);
+  --warm-soft: rgba(212, 165, 116, 0.15);
+
+  /* ---- Geometry ---- */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  --nav-h: 64px;
+  --wrap: 1200px;
+  --section-y: clamp(6rem, 5rem + 4vw, 8rem);   /* py-24 → py-32 */
+
+  /* ---- Motion ----
+     One shared curve. Every card, button and link transitions on this so the
+     whole page moves with a single hand. */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-fast: 200ms;
+  --t: 400ms;
+  --t-slow: 600ms;
+}
+
+/* ==========================================================================
+   Reset
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  /* The sticky bar would otherwise cover the top of any anchored section. */
+  scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1, h2, h3, h4, p, dl, dd, figure {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Every heading at display scale is Clash Grotesk; body copy never is. */
+h1, h2, h3,
+.font-display {
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: clamp(1.25rem, 4vw, 2rem);
+  padding-right: clamp(1.25rem, 4vw, 2rem);
+}
+
+section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+/* Ghost container: the sophisticated 5%-border look used by every card. */
+.ghost {
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-lg);
+}
+
+/* ---- Section heading ---- */
+
+.section-head {
+  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+/* The 48px rule that pairs with every eyebrow, hero badge included. */
+.eyebrow::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.section-head h2 {
+  font-size: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
+}
+
+.section-head p {
+  margin-top: 1rem;
+  max-width: 52ch;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 48px;
+  padding: 0 1.75rem;
+  border-radius: var(--r-pill);
+  font-family: var(--body);
+  font-size: 15px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: transform var(--t) var(--ease), background-color var(--t) var(--ease),
+    border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-ghost {
+  border-color: var(--ghost-strong);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn .icon {
+  font-size: 1.05em;
+}
+
+/* ---- Tags ---- */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--r-pill);
+  background: var(--surface-light);
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+/* ---- Focus ---- */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 200;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--r-sm);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  transition: top var(--t-fast) var(--ease);
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+}
+
+/* ==========================================================================
+   Reveal on scroll
+   Scoped to .js, which script.js adds before anything can throw: most of the
+   page sits inside a .reveal, so an unconditional opacity:0 would mean a
+   blocked or failed script renders a blank site.
+   ========================================================================== */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--t-slow) var(--ease), transform var(--t-slow) var(--ease);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
