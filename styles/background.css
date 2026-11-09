@@ -85,8 +85,8 @@
   animation: float4 34s ease-in-out infinite;
 }
 
-/* Four independent drifts, reused by the hero orb's icon containers so the
-   whole page floats to the same four rhythms. */
+/* Four independent drifts, one per shape, so no two ever move in sync. Each
+   keeps its shape's static rotate() so the tilt survives the animation. */
 @keyframes float1 {
   0%, 100% { transform: translate(0, 0); }
   50%      { transform: translate(-24px, 28px); }

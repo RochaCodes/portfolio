@@ -1,5 +1,7 @@
 /* ==========================================================================
-   Hero — split layout, with the orbiting orb on the right
+   Hero — the pitch on the left, an "at a glance" panel on the right
+   Everything a first-time visitor needs is in the first screen: who, what,
+   where things stand now, and one number that proves it.
    ========================================================================== */
 
 .hero {
@@ -10,25 +12,27 @@
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: clamp(2.5rem, 2rem + 4vw, 5rem);
   align-items: center;
 }
 
-/* ---- Left column ---- */
+/* ---- Pitch ---- */
 
 .hero h1 {
-  font-size: clamp(2.75rem, 1.9rem + 4.2vw, 4.5rem);   /* → 72px */
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  margin-top: 1.75rem;
+  font-size: clamp(3rem, 2rem + 5vw, 5.5rem);   /* → 88px */
+  line-height: 0.98;
+  letter-spacing: -0.04em;
 }
 
 .hero h1 span {
   display: block;
 }
 
-/* Accent → Warm, the headline's one flourish. Nothing here animates, so
-   background-clip:text is safe: no descendant gets a layer of its own. */
+/* Accent → Warm, the headline's one flourish and the only gradient on the
+   page. Nothing here animates, so background-clip:text is safe: no
+   descendant gets a layer of its own. */
 .grad {
   background: linear-gradient(100deg, var(--accent) 0%, var(--warm) 100%);
   -webkit-background-clip: text;
@@ -58,184 +62,111 @@
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 2.5rem;
 }
 
-/* ==========================================================================
-   The orb
-   384px container: a gradient avatar at the centre, two counter-rotating
-   border rings around it, and four icon tiles that orbit while drifting on
-   their own float cycles.
-
-   The nesting is what makes that possible — one element can only run one
-   transform animation, so each job gets its own level:
-     .orb-orbit   carries the orbit rotation
-     .orb-slot    places the tile at its angle (and cancels that angle)
-     .orb-upright counter-rotates so the tile never turns upside down
-     .orb-icon    drifts on its own float cycle
-   ========================================================================== */
-
-.hero-visual {
-  display: grid;
-  place-items: center;
+/* "Find me on" row: the third, quietest tier under the two buttons. */
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.25rem;
+  margin-top: 2rem;
+  font-size: 14px;
+  color: var(--muted);
 }
 
-.orb {
-  position: relative;
-  width: 384px;
-  height: 384px;
-  max-width: 100%;
-}
-
-/* ---- Rings ---- */
-
-.orb-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  border: 1px solid var(--ghost);
-}
-
-/* A single node on each ring, so the rotation is actually legible — a bare
-   circle spinning looks completely static. */
-.orb-ring::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  margin-left: -2.5px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.orb-ring-1 {
-  width: 384px;
-  height: 384px;
-  margin: -192px 0 0 -192px;
-  animation: spin-slow 30s linear infinite;
-}
-
-.orb-ring-2 {
-  width: 288px;
-  height: 288px;
-  margin: -144px 0 0 -144px;
-  border-color: var(--ghost-accent);
-  animation: spin-slow 20s linear infinite reverse;
-}
-
-.orb-ring-2::before {
-  background: var(--warm);
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* ---- Avatar ---- */
-
-.orb-avatar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 168px;
-  height: 168px;
-  margin: -84px 0 0 -84px;
-  border-radius: 50%;
-  background: linear-gradient(140deg, var(--accent) 0%, var(--warm) 100%);
-  display: grid;
-  place-items: center;
-  font-family: var(--display);
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--bg);
-  user-select: none;
-}
-
-/* ---- Orbiting icon tiles ---- */
-
-.orb-orbit {
-  position: absolute;
-  inset: 0;
-  animation: spin-slow 44s linear infinite;
-}
-
-.orb-slot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 48px;
-  height: 48px;
-  /* Place at --a degrees on a 168px radius, then unrotate so the tile itself
-     sits square before .orb-upright takes over. */
-  transform: rotate(var(--a)) translateY(-168px) rotate(calc(-1 * var(--a)));
-  margin: -24px 0 0 -24px;
-}
-
-.orb-upright {
-  width: 100%;
-  height: 100%;
-  animation: spin-slow 44s linear infinite reverse;
-}
-
-.orb-icon {
-  width: 100%;
-  height: 100%;
-  border-radius: var(--r-md);
-  background: var(--surface);
-  border: 1px solid var(--ghost-strong);
-  display: grid;
-  place-items: center;
-  font-size: 20px;
+.hero-links a {
   color: var(--text-2);
+  border-bottom: 1px solid var(--ghost-strong);
+  padding-bottom: 2px;
   transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
 }
 
-.orb-icon:hover {
-  color: var(--accent);
+.hero-links a:hover {
+  color: var(--text);
   border-color: var(--accent);
 }
 
-/* Four drifts, one per tile, so they never move in sync. These are separate
-   from the float1-4 in background.css: those carry a static rotate() for the
-   drifting shapes, and the tiles need the drift without the tilt. */
-.orb-slot:nth-child(1) .orb-icon { animation: orb-float-1 7s ease-in-out infinite; }
-.orb-slot:nth-child(2) .orb-icon { animation: orb-float-2 9s ease-in-out infinite; }
-.orb-slot:nth-child(3) .orb-icon { animation: orb-float-3 8s ease-in-out infinite; }
-.orb-slot:nth-child(4) .orb-icon { animation: orb-float-4 10s ease-in-out infinite; }
+/* ---- At a glance ----
+   A definition list rather than prose, so it can be read in any order and
+   scanned in seconds. */
 
-@keyframes orb-float-1 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(-5px, 7px); }
+.glance {
+  position: relative;
+  padding: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-xl);
 }
 
-@keyframes orb-float-2 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(6px, -8px); }
+.glance-title {
+  margin-bottom: 1.1rem;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-@keyframes orb-float-3 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(7px, 5px); }
+.glance-row {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--ghost);
 }
 
-@keyframes orb-float-4 {
-  0%, 100% { transform: translate(0, 0); }
-  50%      { transform: translate(-7px, -6px); }
+.glance-row dt {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .orb-ring,
-  .orb-orbit,
-  .orb-upright,
-  .orb-icon {
-    animation: none;
-  }
+.glance-row dd {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.glance-row dd span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+/* The proof: one number, inset on the page ground so it reads as a separate
+   object inside the panel. */
+.glance-stat {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--bg);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-md);
+}
+
+.glance-num {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 1.9rem + 1.2vw, 2.875rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.glance-stat p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
 }
 
 /* ---- Responsive ---- */
@@ -243,113 +174,28 @@
 @media (max-width: 980px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 3.5rem;
+    gap: 3rem;
   }
 
-  .hero-visual {
-    order: -1;
+  .glance {
+    max-width: 560px;
   }
-
-  .orb {
-    width: 320px;
-    height: 320px;
-  }
-
-  .orb-ring-1 { width: 320px; height: 320px; margin: -160px 0 0 -160px; }
-  .orb-ring-2 { width: 240px; height: 240px; margin: -120px 0 0 -120px; }
-  .orb-avatar { width: 140px; height: 140px; margin: -70px 0 0 -70px; font-size: 46px; }
-  .orb-slot { transform: rotate(var(--a)) translateY(-140px) rotate(calc(-1 * var(--a))); }
 }
 
 @media (max-width: 420px) {
-  .orb {
-    width: 260px;
-    height: 260px;
+  .glance-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
   }
 
-  .orb-ring-1 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
-  .orb-ring-2 { width: 196px; height: 196px; margin: -98px 0 0 -98px; }
-  .orb-avatar { width: 116px; height: 116px; margin: -58px 0 0 -58px; font-size: 38px; }
-  .orb-slot { transform: rotate(var(--a)) translateY(-114px) rotate(calc(-1 * var(--a))); }
-}
-
-/* ==========================================================================
-   Skill marquee
-   Full-width band, 5% borders top and bottom, seamless 25s loop.
-   ========================================================================== */
-
-.marquee {
-  padding: 0;
-  background: var(--surface);
-  border-top: 1px solid var(--ghost);
-  border-bottom: 1px solid var(--ghost);
-  overflow: hidden;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  padding: 1.25rem 0;
-  animation: marquee 25s linear infinite;
-}
-
-/* The list is duplicated in the markup; translating by exactly -50% lands
-   the copy where the original started, so the loop has no seam. */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
-}
-
-.marquee-list {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.marquee-list li {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0 2rem;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-2);
-  white-space: nowrap;
-}
-
-.marquee-list li::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-/* Alternating dot colour down the run. */
-.marquee-list li:nth-child(even)::before {
-  background: var(--warm);
+  .glance-stat {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-    /* Without the scroll the duplicate is dead weight, and the first copy
-       alone would sit flush left; centre what fits instead. */
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .marquee-list[aria-hidden="true"] {
-    display: none;
-  }
-  .marquee-list {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.5rem 0;
+  .hero-links a {
+    transition: none;
   }
 }
