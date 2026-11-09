@@ -12,10 +12,9 @@
   gap: 1.25rem;
 }
 
-/* A slight stagger, so a row of two arrives as a pair rather than a slab.
-   The odd children are the right-hand card of each pair (the first child is
-   the full-width feature card). */
-.js .work-grid > .reveal.is-visible:nth-child(odd) {
+/* A slight stagger, so a row of two arrives as a pair rather than a slab:
+   the even children are the right-hand card of each pair. */
+.js .work-grid > .reveal.is-visible:nth-child(even) {
   animation-delay: 80ms;
 }
 
@@ -168,110 +167,13 @@
   color: var(--muted);
 }
 
-.work-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-/* Round arrow button: light disc, dark arrow, turning Sunset Red on hover. */
-.work-link-dot {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 17px;
-  background: var(--text);
-  color: var(--bg);
-  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
-}
-
-.work-link-dot .icon {
-  transition: transform var(--t) var(--ease);
-}
-
-.work-link:hover .work-link-dot {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-.work-link:hover .work-link-dot .icon {
-  transform: translate(2px, -2px);
-}
-
-.work-link:focus-visible {
-  border-radius: var(--r-pill);
-}
-
+/* The code link itself is the shared .arrow-link (tokens.css). */
 .work-private {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   min-height: 40px;
   font-size: 13px;
-  color: var(--muted);
-}
-
-/* ---- Feature card ----
-   Spans the row, with its numbers in a panel of their own on the right. */
-
-.work-card--feature {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-  grid-template-areas:
-    "body  stats"
-    "foot  foot";
-  column-gap: clamp(2rem, 1.5rem + 2.5vw, 4rem);
-}
-
-.work-card--feature .work-body  { grid-area: body; }
-.work-card--feature .work-stats { grid-area: stats; }
-.work-card--feature .work-foot  { grid-area: foot; }
-
-.work-stats {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: clamp(1.5rem, 1.25rem + 1vw, 2.25rem);
-  background: var(--bg);
-  border: 1px solid var(--ghost);
-  border-radius: var(--r-md);
-}
-
-.stat {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.stat + .stat {
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--ghost);
-}
-
-.stat-num {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: clamp(3rem, 2.4rem + 2vw, 4.25rem);
-  line-height: 0.95;
-  letter-spacing: -0.04em;
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-label {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.work-stats-note {
-  font-size: 12px;
-  line-height: 1.5;
   color: var(--muted);
 }
 
@@ -489,36 +391,6 @@
    Responsive
    ========================================================================== */
 
-@media (max-width: 980px) {
-  .work-card--feature {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "body"
-      "stats"
-      "foot";
-  }
-
-  .work-stats {
-    margin-top: 1.75rem;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-end;
-  }
-
-  .stat {
-    flex: 1 1 12rem;
-  }
-
-  .stat + .stat {
-    padding-top: 0;
-    border-top: 0;
-  }
-
-  .work-stats-note {
-    flex-basis: 100%;
-  }
-}
-
 @media (max-width: 860px) {
   .index-row {
     grid-template-columns: 2.25rem minmax(0, 1fr);
@@ -535,7 +407,7 @@
     grid-template-columns: 1fr;
   }
 
-  .js .work-grid > .reveal.is-visible:nth-child(odd) {
+  .js .work-grid > .reveal.is-visible:nth-child(even) {
     animation-delay: 0ms;
   }
 
@@ -570,17 +442,11 @@
 @media (prefers-reduced-motion: reduce) {
   .work-card,
   .work-icon,
-  .work-link-dot,
-  .work-link-dot .icon,
   .oss {
     transition: none;
   }
 
   .work-card:hover {
     translate: none;
-  }
-
-  .work-link:hover .work-link-dot .icon {
-    transform: none;
   }
 }

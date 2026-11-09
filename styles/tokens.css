@@ -404,6 +404,48 @@ section {
   transform: translate(2px, -2px);
 }
 
+/* ---- Arrow link ----
+   Label plus a round arrow button — light disc, dark arrow, turning Sunset
+   Red on hover. The way into code or a pull request, in any section. */
+
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.arrow-link-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  background: var(--text);
+  color: var(--bg);
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+
+.arrow-link-dot .icon {
+  transition: transform var(--t) var(--ease);
+}
+
+.arrow-link:hover .arrow-link-dot {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.arrow-link:hover .arrow-link-dot .icon {
+  transform: translate(2px, -2px);
+}
+
+.arrow-link:focus-visible {
+  border-radius: var(--r-pill);
+}
+
 /* ---- Pill ----
    Status badge with a live dot: "open to roles" at the top of the page and
    again at the bottom. */
@@ -563,6 +605,8 @@ button:focus-visible {
   .btn-dot,
   .text-link,
   .text-link .icon,
+  .arrow-link-dot,
+  .arrow-link-dot .icon,
   .tag {
     transition: none;
   }
@@ -570,7 +614,8 @@ button:focus-visible {
   .btn:hover,
   .btn:active,
   .btn--lead:hover .btn-dot,
-  .text-link:hover .icon {
+  .text-link:hover .icon,
+  .arrow-link:hover .arrow-link-dot .icon {
     transform: none;
   }
 }

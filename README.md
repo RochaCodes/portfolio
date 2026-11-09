@@ -17,10 +17,10 @@ this site's own design system rather than copied.
 | Section | What it does | Pattern it adapts |
 | --- | --- | --- |
 | Hero | Pitch, CTAs, and an "at a glance" panel: now, last role, open source, location, one headline number | Evergrid Hero 01 (status pill, proof panel), Vinyl (round-icon CTA, "find me on" row) |
-| Work | Five project cards with one shared anatomy; the first spans the row with its stats | Evergrid Case Studies / Use Cases 01 (outcome-first cards, round arrow button) |
+| Work | Four project cards with one shared anatomy, in a 2×2 grid | Evergrid Case Studies / Use Cases 01 (outcome-first cards, round arrow button) |
 | Work → open source | The Kubernetes PR as a band with a progress stepper | Evergrid How It Works 01 (numbered steps on a connector) |
-| Work → more on GitHub | The long tail as a numbered index | Vinyl's tracklist |
-| Experience | One role card: summary, pipeline strip, contributions, stack, photo | Evergrid About Us Features |
+| Work → more projects | The long tail as a numbered index | Vinyl's tracklist |
+| Experience | Two role cards, newest first (SolvIt, DEI): summary, contributions, stack, and beside them a photo or a results panel | Evergrid About Us Features 01/02 (copy beside a visual or a big stat) |
 | About | Toolkit spec table, then Education and Beyond the code timelines | — |
 | Contact | One panel: the ask on the left, every contact route as a list on the right | Evergrid Contact 01 + CTA 01 |
 | Footer | Name and line, two short link columns, bottom bar | Evergrid Footer 01, simplified |
@@ -66,9 +66,11 @@ file.
 
 **Shared components** (all in `tokens.css`): `.pill` (status with a live
 dot), `.btn--lead` + `.btn-dot` (icon in its own circle inside the button),
-`.text-link` (the quiet third tier after filled and ghost buttons), `.status`
-(where a project stands), `.tags`, `.section-head--split`, `.block-title`,
-`.visually-hidden`, `.unit`.
+`.text-link` (the quiet third tier after filled and ghost buttons),
+`.arrow-link` + `.arrow-link-dot` (label and round arrow button — the way into
+code, on project cards, the open-source band and the DEI role card),
+`.status` (where a project stands), `.tags`, `.section-head--split`,
+`.block-title`, `.visually-hidden`, `.unit`.
 
 ## Files
 
@@ -85,7 +87,8 @@ styles/       loaded as separate <link> tags in source order, no build step:
                 hero.css        hero pitch and the "at a glance" panel
                 projects.css    work cards, the open-source band and
                                 stepper, the numbered index
-                experience.css  the role card, pipeline strip, Toolkit table
+                experience.css  role cards, pipeline strip, results panel,
+                                Toolkit table
                 timeline.css    Education / Beyond the code timelines,
                                 photo figure
                 contact.css     contact panel, footer
@@ -117,27 +120,27 @@ wrangler.jsonc  Cloudflare Workers static-assets config (name: rodrigo-rocha)
 
 ## Where the content comes from
 
-Project copy is written from the repositories themselves (READMEs and commit
-history), so it can be re-checked against them:
+**The CV (`Rodrigo-Rocha-CV.pdf`) is the source of truth** for study status,
+roles, dates and skills — when it and the GitHub bio disagree, the CV wins.
+Whenever the CV changes, re-check the hero line, the "at a glance" panel,
+Experience and Education against it. Project copy is written from the
+repositories themselves (READMEs and commit history), so it can be
+re-checked against them:
 
 | On the site | Source | Visibility |
 | --- | --- | --- |
-| Exam Timetabling Engine | `RochaCodes/calendarioexames` (continues the team capstone repo) | public |
+| Hero, "at a glance", Education | the CV (final year, already taking M.EIC units) | — |
+| SolvIt internship (Jul – Sep 2026) | the CV + `RochaCodes/imageclassifier` | private |
+| DEI internship (exam timetabling, Feb – Jul 2026) and its stats (88.9%, 78.1%) | the CV; code in `RochaCodes/calendarioexames`, which continues the original project repo | public |
 | Rotina | `RochaCodes/rotina` | private |
 | Spotiganizer | `RochaCodes/Spotiganizer` | public |
 | Teoria Musical | `RochaCodes/teoriamusical` | public |
 | Tuna Feminina de Biomédicas | `RochaCodes/tfb-site` | private |
 | Kubernetes fix | `kubernetes/kubernetes#141622` (fixes #141572) | public, **open — update the stepper when it merges** |
-| SolvIt internship | `RochaCodes/imageclassifier` + the CV | private |
-| More on GitHub | `FEUP-MEIC-DS-2026-27/Staffing-Alocation-Prototype_1MEIC05T1`, `appCE`, `josearcher/IA-Project-`, `RCOM_LAB1`, `AppTuna`, `FEUP-LTW-2025/ltw-project-ltw13g05` | private / course |
-| Exam stats (88.9%, 78.1%) | the CV | — |
+| More projects | EBEC from the CV; then `FEUP-MEIC-DS-2026-27/Staffing-Alocation-Prototype_1MEIC05T1`, `appCE`, `josearcher/IA-Project-`, `RCOM_LAB1`, `AppTuna`, `FEUP-LTW-2025/ltw-project-ltw13g05` | private / course |
 
 ## Before this goes live
 
-- [ ] **Confirm the education line.** The site follows the GitHub bio
-      ("1st Year MSc"): it lists the M.EIC as 2026 – now and the bachelor's as
-      2023 – 2026. `Rodrigo-Rocha-CV.pdf` still says "final-year" — update it
-      to match, since it's what every CV button downloads.
 - [ ] **Check the SolvIt card is OK to publish.** The pipeline stages and the
       last bullet (cheapest-first cascade, vision-model fallback, review
       queue) come from the private `imageclassifier` repo, beyond what the CV
