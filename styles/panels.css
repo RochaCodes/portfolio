@@ -1,0 +1,419 @@
+/* ==========================================================================
+   Panels — the column of cards that holds everything below the profile
+   ========================================================================== */
+
+main.column {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+}
+
+.panel {
+  min-width: 0;
+  padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-xl);
+}
+
+/* ---- Panel heading: icon tile + title ---- */
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: var(--accent);
+  background: var(--surface-light);
+  border: 1px solid var(--ghost);
+  flex-shrink: 0;
+}
+
+.panel-head h2 {
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 1.875rem);
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   Entry — one role, degree, project or activity
+   Inset on the page ground, with a Sunset Red edge down the left that lights
+   up on hover, and an optional visual on the right: a photo, the project's
+   icon, or the role's numbers.
+   ========================================================================== */
+
+.entries {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1.25rem 1.75rem;
+  padding: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+  padding-left: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  background: var(--bg);
+  border: 1px solid var(--ghost);
+  border-left: 3px solid var(--accent-soft);
+  border-radius: var(--r-md);
+  transition: border-color var(--t) var(--ease), translate var(--t) var(--ease);
+}
+
+.entry:hover {
+  border-left-color: var(--accent);
+}
+
+/* The entry eases right as its edge lights — the feel of a thickening
+   border, without any reflow. Pointer devices only, so a tap on a phone
+   doesn't leave an entry stuck out of line. */
+@media (hover: hover) {
+  .entry:hover {
+    translate: 4px 0;
+  }
+}
+
+.entry-body {
+  min-width: 0;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.9rem;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.entry h3 {
+  margin-top: 0.4rem;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* A project's title is its link: ↗ after the name, accent on hover. */
+.entry h3 a {
+  transition: color var(--t) var(--ease);
+}
+
+.entry h3 a .icon {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-size: 0.75em;
+  color: var(--muted);
+  transition: color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+
+.entry h3 a:hover,
+.entry h3 a:hover .icon {
+  color: var(--accent);
+}
+
+.entry h3 a:hover .icon {
+  transform: translate(2px, -2px);
+}
+
+.entry-sub {
+  margin-top: 0.3rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--warm);
+}
+
+.entry-text {
+  margin-top: 0.75rem;
+  max-width: 68ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.entry-points {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 68ch;
+}
+
+.entry-points li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+
+.entry-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.entry .tags {
+  margin-top: 1rem;
+}
+
+.entry:hover .tag {
+  color: var(--text);
+}
+
+.entry-link {
+  margin-top: 1.1rem;
+}
+
+.entry-private {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ---- Visuals on the right ---- */
+
+.entry-photo {
+  width: 180px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  border: 1px solid var(--ghost);
+  background: var(--surface);
+}
+
+.entry-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: saturate(0.9);
+  transition: filter var(--t) var(--ease), transform var(--t-slow) var(--ease);
+}
+
+.entry:hover .entry-photo img {
+  filter: saturate(1);
+  transform: scale(1.04);
+}
+
+.entry-photo figcaption {
+  padding: 0.45rem 0.65rem;
+  font-size: 11px;
+  color: var(--muted);
+  border-top: 1px solid var(--ghost);
+}
+
+.entry-tile {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-md);
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  transition: background-color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+
+.entry:hover .entry-tile {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+/* The role's results, in the slot a photo would take. */
+.entry-stats {
+  width: 180px;
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--ghost);
+  border-radius: var(--r-sm);
+}
+
+.entry-stats p + p {
+  padding-top: 1rem;
+  border-top: 1px solid var(--ghost);
+}
+
+.stat-num {
+  display: block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.25rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+/* ==========================================================================
+   Skills — five groups of tags, two to a row
+   ========================================================================== */
+
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+}
+
+/* An odd group out spans the row rather than leaving a hole. */
+.skill-group:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.skill-group h3 {
+  margin-bottom: 0.75rem;
+  font-family: var(--body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skill-group .tag {
+  font-size: 13px;
+}
+
+/* ==========================================================================
+   More projects — the long tail as a compact numbered list
+   ========================================================================== */
+
+.more {
+  margin-top: 2rem;
+}
+
+.more h3 {
+  padding-bottom: 0.8rem;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ghost-strong);
+}
+
+.more-list li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--ghost);
+}
+
+.more-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.more-num {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.more-main strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.more-main span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.more-meta {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  /* One column: a photo or the numbers move above the text, the way a phone
+     reads top to bottom; the decorative project icons step aside. */
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-photo,
+  .entry-stats {
+    order: -1;
+    width: 100%;
+  }
+
+  .entry-tile {
+    display: none;
+  }
+
+  .entry-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .entry-stats p + p {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .skill-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .more-list li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .more-meta {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .entry,
+  .entry-tile,
+  .entry-photo img,
+  .entry h3 a,
+  .entry h3 a .icon {
+    transition: none;
+  }
+
+  .entry:hover {
+    translate: none;
+  }
+
+  .entry:hover .entry-photo img,
+  .entry h3 a:hover .icon {
+    transform: none;
+  }
+}

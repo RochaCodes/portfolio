@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Profile — the first panel: who I am, in one centred block
+   Avatar, name, role, a short bio, availability, and every way to reach me.
+   Everything below it is detail.
+   ========================================================================== */
+
+.profile {
+  text-align: center;
+  padding-top: clamp(2.5rem, 2rem + 3vw, 4rem);
+  padding-bottom: clamp(2.5rem, 2rem + 3vw, 4rem);
+}
+
+/* Monogram in the accent gradient, with a thin accent ring set off from it:
+   the place a photo would go, in the site's own colours. */
+.avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(140deg, var(--accent) 0%, var(--warm) 100%);
+  color: var(--on-accent);
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  outline: 1px solid var(--accent);
+  outline-offset: 7px;
+  user-select: none;
+}
+
+.profile h1 {
+  margin-top: 2rem;
+  font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem);   /* → 64px */
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+/* Accent → Warm on the surname. Nothing here animates, so
+   background-clip:text is safe: no descendant gets a layer of its own. */
+.grad {
+  background: linear-gradient(100deg, var(--accent) 0%, var(--warm) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .grad {
+    color: var(--accent);
+  }
+}
+
+.profile-role {
+  margin-top: 0.85rem;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--warm);
+}
+
+.profile-bio {
+  margin: 1.25rem auto 0;
+  max-width: 58ch;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.profile .pill {
+  margin-top: 1.5rem;
+}
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+/* Round icon button: GitHub, LinkedIn, email. Each has a hidden text label
+   and a tooltip, so the icon is never the only name it has. */
+.icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  color: var(--text-2);
+  background: var(--surface-light);
+  border: 1px solid var(--ghost-strong);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease),
+    translate var(--t) var(--ease);
+}
+
+.icon-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (hover: hover) {
+  .icon-btn:hover {
+    translate: 0 -3px;
+  }
+}
+
+.icon-btn:focus-visible {
+  border-radius: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn {
+    transition: none;
+  }
+
+  .icon-btn:hover {
+    translate: none;
+  }
+}

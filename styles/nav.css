@@ -1,5 +1,7 @@
 /* ==========================================================================
-   Sticky navigation — 64px, flat #0C0C0C, 5% white hairline underneath
+   Sticky navigation — 64px, flat #0C0C0C, 5% white hairline underneath.
+   Name on the left, section links on the right, on the same column as the
+   panels below.
    ========================================================================== */
 
 .nav {
@@ -33,6 +35,11 @@
 }
 
 /* ---- Links ---- */
+
+/* Pushes the links (and, on mobile, the menu button) to the right edge. */
+.nav-inner > nav {
+  margin-left: auto;
+}
 
 .nav-links {
   display: flex;
@@ -82,12 +89,6 @@
   gap: 1rem;
 }
 
-.nav-cta {
-  height: 40px;
-  padding: 0 1.35rem;
-  font-size: 14px;
-}
-
 /* ---- Mobile ---- */
 
 .nav-toggle {
@@ -121,7 +122,9 @@
 .nav.is-open .nav-toggle .bar:nth-child(2) { opacity: 0; }
 .nav.is-open .nav-toggle .bar:nth-child(3) { transform: rotate(-45deg); }
 
-@media (max-width: 860px) {
+/* The name and four short links fit inline down to ~470px, so the menu
+   button only takes over on phones. */
+@media (max-width: 560px) {
   .nav-toggle {
     display: flex;
   }
@@ -173,10 +176,6 @@
 
   .nav-links a:hover {
     color: var(--accent);
-  }
-
-  .nav-cta {
-    display: none;
   }
 }
 

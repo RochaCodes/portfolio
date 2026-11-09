@@ -4,9 +4,8 @@
 
    Dark, high-contrast and warm: near-black grounds under a Sunset Red accent
    with a Sand Warmth secondary. Clash Grotesk carries display text (headings,
-   card headlines, stats, the logo); Satoshi carries body text and UI. Depth
-   comes from thin 5% white "ghost" borders and translation transforms —
-   never heavy shadows.
+   stats, the logo); Satoshi carries body text and UI. Depth comes from thin
+   5% white "ghost" borders and small translations — never heavy shadows.
 
    Nothing below hardcodes a colour: every surface, border and accent reads a
    token, so the whole system repaints from this one file.
@@ -76,8 +75,8 @@
   --text-2: #B0ADA8;
   --muted: #8A8A8A;
 
-  /* Ink for anything sitting ON the accent fill — buttons, hovered tags,
-     the step nodes. Sunset Red is light enough that --text over it is only
+  /* Ink for anything sitting ON the accent fill — buttons, the avatar,
+     hovered tags. Sunset Red is light enough that --text over it is only
      3.1:1, which fails AA at label sizes; the near-black ground gives 5.4:1
      and reads sharper on the orange besides. */
   --on-accent: var(--bg);
@@ -92,8 +91,8 @@
   --warm-soft: rgba(212, 165, 116, 0.15);
 
   /* ---- Geometry ----
-     Radius steps down as elements nest: panels are the softest, the tiles
-     and chips inside them the tightest. */
+     Radius steps down as elements nest: panels are the softest, the entries
+     inside them tighter, chips and tiles the tightest. */
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 16px;
@@ -101,8 +100,7 @@
   --r-pill: 999px;
 
   --nav-h: 64px;
-  --wrap: 1200px;
-  --section-y: clamp(6rem, 5rem + 4vw, 8rem);   /* py-24 → py-32 */
+  --column: 920px;   /* the one column everything sits in, padding included */
 
   /* ---- Motion ----
      One shared curve. Every card, button and link transitions on this so the
@@ -124,8 +122,8 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  /* The sticky bar would otherwise cover the top of any anchored section. */
-  scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+  /* The sticky bar would otherwise cover the top of any anchored panel. */
+  scroll-padding-top: calc(var(--nav-h) + 1.25rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -178,7 +176,7 @@ button {
   color: var(--on-accent);
 }
 
-/* Every heading at display scale is Clash Grotesk; body copy never is. */
+/* Every heading is Clash Grotesk; body copy never is. */
 h1, h2, h3 {
   font-family: var(--display);
   font-weight: 700;
@@ -204,7 +202,7 @@ p, li, dd {
 }
 
 /* Hidden on screen, still read aloud: link context such as "(opens in a new
-   tab)" or which project a "View code" link belongs to. */
+   tab)", or the label of an icon-only button. */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -224,77 +222,16 @@ p, li, dd {
 }
 
 /* ==========================================================================
-   Layout primitives
+   Layout — one centred column for the header, the panels and the footer,
+   so every edge on the page lines up.
    ========================================================================== */
 
-.wrap {
+.column {
   width: 100%;
-  max-width: var(--wrap);
+  max-width: var(--column);
   margin: 0 auto;
-  padding-left: clamp(1.25rem, 4vw, 2rem);
-  padding-right: clamp(1.25rem, 4vw, 2rem);
-}
-
-section {
-  padding-top: var(--section-y);
-  padding-bottom: var(--section-y);
-}
-
-/* ---- Section heading ---- */
-
-.section-head {
-  margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem);
-}
-
-/* Heading on the left, one supporting link on the right, sharing a baseline
-   along the bottom edge. */
-.section-head--split {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.25rem;
-}
-
-/* The 48px rule that pairs with every eyebrow. */
-.eyebrow::before {
-  content: "";
-  width: 48px;
-  height: 1px;
-  background: var(--accent);
-  flex-shrink: 0;
-}
-
-.section-head h2 {
-  font-size: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
-}
-
-.section-head p {
-  margin-top: 1rem;
-  max-width: 56ch;
-  font-size: 18px;
-  line-height: 1.7;
-  color: var(--text-2);
-}
-
-/* A heading inside a section: Toolkit, Education, Beyond the code. */
-.block-title {
-  font-size: 20px;
-  margin-bottom: 1.75rem;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid var(--ghost);
+  padding-left: clamp(1rem, 4vw, 1.5rem);
+  padding-right: clamp(1rem, 4vw, 1.5rem);
 }
 
 /* ---- Buttons ---- */
@@ -333,51 +270,19 @@ section {
   background: var(--accent-hover);
 }
 
-.btn-ghost {
-  border-color: var(--ghost-strong);
-  color: var(--text);
-}
-
-.btn-ghost:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 .btn .icon {
   font-size: 1.05em;
 }
 
-/* Leading-icon variant: the icon sits in its own circle inside the pill,
-   6px from the edge, and nudges on hover. */
-.btn--lead {
-  padding-left: 6px;
-  gap: 0.8rem;
-}
-
-.btn-dot {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--on-accent);
-  color: var(--accent);
-  flex-shrink: 0;
-  transition: transform var(--t) var(--ease);
-}
-
-.btn-ghost .btn-dot {
-  background: var(--surface-light);
-  color: var(--text);
-}
-
-.btn--lead:hover .btn-dot {
-  transform: scale(1.08);
+/* Compact size, to sit in a row of 48px icon buttons. */
+.btn-sm {
+  height: 48px;
+  padding: 0 1.4rem;
+  font-size: 14px;
 }
 
 /* ---- Text link ----
-   The quiet third tier, after the filled and ghost buttons. No blue: body
-   colour, with an accent rule on hover. */
+   The quiet link style. No blue: body colour, with an accent rule on hover. */
 
 .text-link {
   display: inline-flex;
@@ -404,51 +309,8 @@ section {
   transform: translate(2px, -2px);
 }
 
-/* ---- Arrow link ----
-   Label plus a round arrow button — light disc, dark arrow, turning Sunset
-   Red on hover. The way into code or a pull request, in any section. */
-
-.arrow-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.arrow-link-dot {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 17px;
-  background: var(--text);
-  color: var(--bg);
-  transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
-}
-
-.arrow-link-dot .icon {
-  transition: transform var(--t) var(--ease);
-}
-
-.arrow-link:hover .arrow-link-dot {
-  background: var(--accent);
-  color: var(--on-accent);
-}
-
-.arrow-link:hover .arrow-link-dot .icon {
-  transform: translate(2px, -2px);
-}
-
-.arrow-link:focus-visible {
-  border-radius: var(--r-pill);
-}
-
 /* ---- Pill ----
-   Status badge with a live dot: "open to roles" at the top of the page and
-   again at the bottom. */
+   Status badge with a live dot: "open to roles" on the profile. */
 
 .pill {
   display: inline-flex;
@@ -456,7 +318,7 @@ section {
   gap: 0.65rem;
   padding: 0.45rem 1rem 0.45rem 0.8rem;
   border-radius: var(--r-pill);
-  background: var(--surface);
+  background: var(--surface-light);
   border: 1px solid var(--ghost-strong);
   font-size: 13px;
   font-weight: 500;
@@ -492,13 +354,13 @@ section {
 
 /* ---- Status ----
    Plain label with a dot, for where a project stands. Sand, not the accent,
-   so it never competes with an action. */
+   so it never competes with a link. */
 
 .status {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.8rem;
+  padding: 0.2rem 0.7rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--warm-soft);
   font-size: 12px;
@@ -564,15 +426,14 @@ button:focus-visible {
 
 /* ==========================================================================
    Reveal on scroll
-   Scoped to .js, which script.js adds before anything can throw: most of the
-   page sits inside a .reveal, so an unconditional opacity:0 would mean a
-   blocked or failed script renders a blank site.
+   Scoped to .js, which script.js adds before anything can throw: the panels
+   sit inside a .reveal, so an unconditional opacity:0 would mean a blocked
+   or failed script renders a blank site.
 
-   It is an animation, not a transition, on purpose. Cards are reveal targets
-   AND hover targets; a `transition` shorthand here would out-specify each
-   card's own transition list and silently drop its hover easing. Animations
-   don't compete with transitions, and card lifts use the separate
-   `translate` property, so the transform this holds never blocks them.
+   It is an animation, not a transition, on purpose: a `transition`
+   shorthand here would out-specify a panel's own transitions, and anything
+   that lifts on hover uses the separate `translate` property, so the
+   transform this holds never blocks it.
    ========================================================================== */
 
 .js .reveal {
@@ -602,20 +463,15 @@ button:focus-visible {
   }
 
   .btn,
-  .btn-dot,
   .text-link,
   .text-link .icon,
-  .arrow-link-dot,
-  .arrow-link-dot .icon,
   .tag {
     transition: none;
   }
 
   .btn:hover,
   .btn:active,
-  .btn--lead:hover .btn-dot,
-  .text-link:hover .icon,
-  .arrow-link:hover .arrow-link-dot .icon {
+  .text-link:hover .icon {
     transform: none;
   }
 }

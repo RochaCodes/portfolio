@@ -8,28 +8,30 @@ Free Font License — see `fonts/LICENSE-Fontshare.txt`.
 
 ## Page structure
 
-One page, ordered the way a visitor scans it: who and what, the proof, where
-I've worked, the background, how to reach me. The section layouts are adapted
-from free sections in the [Oversight Supply](https://supply.madebyoversight.com/sections?price=free)
-library (Evergrid template and the Vinyl portfolio hero), rebuilt by hand in
-this site's own design system rather than copied.
+One column of panels, read top to bottom. The arrangement follows
+[carvalhal05.github.io/portfolio](https://carvalhal05.github.io/portfolio/) —
+a profile card, then one card per section — rebuilt by hand in this site's
+own design system.
 
-| Section | What it does | Pattern it adapts |
-| --- | --- | --- |
-| Hero | Pitch, CTAs, and an "at a glance" panel: now, last role, open source, location, one headline number | Evergrid Hero 01 (status pill, proof panel), Vinyl (round-icon CTA, "find me on" row) |
-| Work | Four project cards with one shared anatomy, in a 2×2 grid | Evergrid Case Studies / Use Cases 01 (outcome-first cards, round arrow button) |
-| Work → open source | The Kubernetes PR as a band with a progress stepper | Evergrid How It Works 01 (numbered steps on a connector) |
-| Work → more projects | The long tail as a numbered index | Vinyl's tracklist |
-| Experience | Two role cards, newest first (SolvIt, DEI): summary, contributions, stack, and beside them a photo or a results panel | Evergrid About Us Features 01/02 (copy beside a visual or a big stat) |
-| About | Toolkit spec table, then Education and Beyond the code timelines | — |
-| Contact | One panel: the ask on the left, every contact route as a list on the right | Evergrid Contact 01 + CTA 01 |
-| Footer | Name and line, two short link columns, bottom bar | Evergrid Footer 01, simplified |
+| Panel | What's in it |
+| --- | --- |
+| Header | Name on the left, links to the four main panels on the right (a menu button on phones) |
+| Profile | Avatar, name, role, a short bio, "open to roles", and GitHub / LinkedIn / email / Download CV |
+| Skills & tools | Five groups of tags, two to a row |
+| Experience | SolvIt and DEI, newest first |
+| Education | Bachelor's at FEUP, secondary school |
+| Projects | Five projects, then a compact numbered list of smaller ones ("More projects") |
+| Beyond the code | Tuna, AV technician, mentoring |
+| Footer | One line: copyright and email, source and back to top |
 
-**Card anatomy** (every project card, so they compare at a glance): name and
-year → the outcome line (the big text) → one-line description → up to three
-points → tags → footer with context on the left and the code link (or
-"Private repository") on the right. Tags and footer are pinned to the bottom so
-they line up across a row.
+**Entry anatomy.** Every role, degree, project and activity is the same
+component, `.entry`: meta line (dates, or year and kind; status or "Private
+repository") → title (a project's title is its link, with ↗) → organisation
+in Sand → a paragraph or bullet points → tags. An optional visual sits on the
+right: a photo (SolvIt, Tuna), the project's icon, or the role's numbers
+(DEI). Entries are inset on the page ground with a Sunset Red edge down the
+left that lights up on hover. On phones the visual moves above the text and
+the decorative project icons are dropped.
 
 ## Design system
 
@@ -39,38 +41,38 @@ file.
 
 | Token | Value | Used for |
 | --- | --- | --- |
-| `--bg` | `#0C0C0C` | page ground, inset stat panels |
-| `--surface` | `#141414` | cards and panels |
-| `--surface-light` | `#1C1C1C` | tags, icon tiles, pipeline chips |
-| `--accent` | `#E8553A` | Sunset Red — actions, dots, numbers, the one gradient |
-| `--warm` | `#D4A574` | Sand Warmth — organisation lines, status labels |
+| `--bg` | `#0C0C0C` | page ground, entries inside panels |
+| `--surface` | `#141414` | panels |
+| `--surface-light` | `#1C1C1C` | tags, icon tiles, icon buttons |
+| `--accent` | `#E8553A` | Sunset Red — actions, entry edges, icons, numbers |
+| `--warm` | `#D4A574` | Sand Warmth — role line, organisations, status labels |
 | `--text` | `#F0EDE8` | body copy |
 | `--text-2` | `#B0ADA8` | secondary copy |
 | `--muted` | `#8A8A8A` | dates, labels, meta |
 | `--ghost` | `rgba(255,255,255,.05)` | the signature container border |
+| `--column` | `920px` | the one column the header, panels and footer share |
 
 **Rules the system holds to:**
 
-- **Clash Grotesk for display text only:** headings, card outcome lines,
-  stats and the logo. Satoshi carries every piece of body text and UI.
-- **Thin borders and translation, never heavy shadows.** Cards lift 6px on
-  hover; depth comes from the 5% white "ghost" edge. Radius steps down as
-  elements nest: 24px panels, 16px cards, 12px tiles, 8px chips.
+- **Clash Grotesk for display text only:** headings, entry titles, stats
+  and the logo. Satoshi carries every piece of body text and UI.
+- **Thin borders and small translations, never heavy shadows.** Depth comes
+  from the 5% white "ghost" edge. Radius steps down as elements nest: 24px
+  panels, 12px entries, 8px photos and chips.
 - **One motion curve.** `--ease: cubic-bezier(0.22, 1, 0.36, 1)` on every
-  card, button and link, so the page moves with a single hand.
+  entry, button and link, so the page moves with a single hand.
 - **Body text is never coloured.** Only `--text` or `--text-2`; the accent is
-  for actions, highlights, numbers and dots. No blue links.
-- **One gradient** (accent → warm), on the surname in the hero. Stats use
-  plain text with the unit in the accent instead.
-- Every animation folds away under `prefers-reduced-motion`.
+  for actions, highlights, numbers and edges. No blue links.
+- **One gradient** (accent → warm): on the surname and the avatar.
+- Every animation folds away under `prefers-reduced-motion`, and hover
+  lifts only happen on devices that can hover.
 
-**Shared components** (all in `tokens.css`): `.pill` (status with a live
-dot), `.btn--lead` + `.btn-dot` (icon in its own circle inside the button),
-`.text-link` (the quiet third tier after filled and ghost buttons),
-`.arrow-link` + `.arrow-link-dot` (label and round arrow button — the way into
-code, on project cards, the open-source band and the DEI role card),
-`.status` (where a project stands), `.tags`, `.section-head--split`,
-`.block-title`, `.visually-hidden`, `.unit`.
+**Components:** `tokens.css` has the shared ones — `.btn` / `.btn-primary` /
+`.btn-sm`, `.text-link`, `.pill` (status with a live dot), `.status`,
+`.tags`, `.visually-hidden`, `.unit`. `profile.css` has `.avatar` and
+`.icon-btn`; `panels.css` has `.panel`, `.panel-head`, `.entry` (with
+`.entry-photo`, `.entry-tile`, `.entry-stats`), `.skill-groups` and
+`.more-list`.
 
 ## Files
 
@@ -80,18 +82,13 @@ index.html    all markup and content, plus the inline icon sprite (Phosphor
               with 12-unit round strokes so they match)
 styles/       loaded as separate <link> tags in source order, no build step:
                 tokens.css      fonts, colour/type/space tokens, reset,
-                                shared components, reveal
+                                .column, shared components, reveal
                 background.css  grain, grid pattern, floating geometry,
                                 scroll progress
                 nav.css         sticky 64px header and the mobile menu
-                hero.css        hero pitch and the "at a glance" panel
-                projects.css    work cards, the open-source band and
-                                stepper, the numbered index
-                experience.css  role cards, pipeline strip, results panel,
-                                Toolkit table
-                timeline.css    Education / Beyond the code timelines,
-                                photo figure
-                contact.css     contact panel, footer
+                profile.css     the profile panel: avatar, name, links
+                panels.css      panels, entries, skills, more projects
+                footer.css      the one-line footer
 script.js     mobile nav, scroll reveal, active nav link, footer year
 fonts/        self-hosted Clash Grotesk (600, 700) + Satoshi (400, 500, 700)
 images/       photos used in Experience and Beyond the code
@@ -108,49 +105,45 @@ wrangler.jsonc  Cloudflare Workers static-assets config (name: rodrigo-rocha)
   `../fonts/…`. A bare `fonts/…` resolves to `styles/fonts/` and silently
   falls back to a system font.
 - **Anything that hides content pending a scroll reveal is scoped to
-  `html.js`**, a class `script.js` adds before it can throw. Most of the page
-  sits inside a `.reveal`, so an unconditional `opacity: 0` would mean a
-  blocked or failed script renders a blank site. Keep that scoping if you add
-  new reveal states.
-- **The scroll reveal is a CSS animation, and card lifts use `translate`.**
-  Cards are both reveal targets and hover targets. A `transition` shorthand on
-  `.js .reveal` would out-specify each card's own transition list and drop its
-  hover easing, and a held `transform` would block a `transform` lift. Keep
-  hover lifts on the individual `translate` property.
+  `html.js`**, a class `script.js` adds before it can throw. Every panel
+  below the profile is a `.reveal`, so an unconditional `opacity: 0` would
+  mean a blocked or failed script renders a near-blank site. Keep that
+  scoping if you add new reveal states.
+- **The scroll reveal is a CSS animation, and hover lifts use `translate`.**
+  A `transition` shorthand on `.js .reveal` would out-specify an element's
+  own transition list, and a held `transform` would block a `transform`
+  lift. Keep hover movement on the individual `translate` property.
 
 ## Where the content comes from
 
 **The CV (`Rodrigo-Rocha-CV.pdf`) is the source of truth** for study status,
 roles, dates and skills — when it and the GitHub bio disagree, the CV wins.
-Whenever the CV changes, re-check the hero line, the "at a glance" panel,
-Experience and Education against it. Project copy is written from the
-repositories themselves (READMEs and commit history), so it can be
-re-checked against them:
+Whenever the CV changes, re-check the profile bio, Experience and Education
+against it. Project copy is written from the repositories themselves
+(READMEs and commit history), so it can be re-checked against them:
 
 | On the site | Source | Visibility |
 | --- | --- | --- |
-| Hero, "at a glance", Education | the CV (final year, already taking M.EIC units) | — |
-| SolvIt internship (Jul – Sep 2026) | the CV + `RochaCodes/imageclassifier` | private |
-| DEI internship (exam timetabling, Feb – Jul 2026) and its stats (88.9%, 78.1%) | the CV; code in `RochaCodes/calendarioexames`, which continues the original project repo | public |
+| Profile bio, Education, Beyond the code | the CV | — |
+| SolvIt internship (Jul – Sep 2026) | the CV | — |
+| DEI internship (Feb – Jul 2026) and its numbers (88.9%, 78.1%) | the CV; code in `RochaCodes/calendarioexames` | public |
 | Rotina | `RochaCodes/rotina` | private |
+| Kubernetes fix | `kubernetes/kubernetes#141622` (fixes #141572) | public, **open — update the status when it merges** |
 | Spotiganizer | `RochaCodes/Spotiganizer` | public |
 | Teoria Musical | `RochaCodes/teoriamusical` | public |
 | Tuna Feminina de Biomédicas | `RochaCodes/tfb-site` | private |
-| Kubernetes fix | `kubernetes/kubernetes#141622` (fixes #141572) | public, **open — update the stepper when it merges** |
 | More projects | EBEC from the CV; then `FEUP-MEIC-DS-2026-27/Staffing-Alocation-Prototype_1MEIC05T1`, `appCE`, `josearcher/IA-Project-`, `RCOM_LAB1`, `AppTuna`, `FEUP-LTW-2025/ltw-project-ltw13g05` | private / course |
 
 ## Before this goes live
 
-- [ ] **Check the SolvIt card is OK to publish.** The pipeline stages and the
-      last bullet (cheapest-first cascade, vision-model fallback, review
-      queue) come from the private `imageclassifier` repo, beyond what the CV
-      says. Trim them if SolvIt would rather they stay internal.
 - [ ] **Tuna Feminina de Biomédicas** is named on the site and the new site
       isn't live yet. Add a link once it is, and confirm they're happy to be
       named.
-- [ ] **Kubernetes PR.** When #141622 merges, change the status pill to
-      "Merged", fill in step 5 with the date, and update the "at a glance"
-      row.
+- [ ] **Kubernetes PR.** When #141622 merges, change "In review" to
+      "Merged" and drop "now awaiting approval" from its paragraph.
+- [ ] **Optional: a profile photo.** The avatar is an "RR" monogram because
+      there's no headshot in the repo. Drop one in `images/` and swap the
+      `.avatar` span for an `<img>` with the same class.
 - [ ] Swap the canonical/OG URL comments in `index.html`'s `<head>` for your
       real domain once it's live, and add an `og:image` (1200×630 PNG).
 
@@ -163,6 +156,10 @@ npx serve .
 # or
 python -m http.server 8080
 ```
+
+If a CSS change doesn't show up, hard-reload (Ctrl+Shift+R): these local
+servers don't send the no-cache headers that `_headers` gives the live site,
+so the browser may keep serving an old stylesheet.
 
 ## Deploy
 

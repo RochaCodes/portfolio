@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Footer — one line: copyright and email on the left, source and back to
+   top on the right, on the same column as everything above.
+   ========================================================================== */
+
+.footer {
+  margin-top: 2.5rem;
+  padding: 1.75rem 0 2.5rem;
+  border-top: 1px solid var(--ghost);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footer a {
+  color: var(--text-2);
+  transition: color var(--t) var(--ease);
+}
+
+.footer a:hover {
+  color: var(--accent);
+}
+
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer a {
+    transition: none;
+  }
+}
